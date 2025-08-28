@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Variables } from "./components/variables/variables";
+import { DataBinding } from './components/data-binding/data-binding';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Variables,DataBinding],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
