@@ -1,0 +1,150 @@
+<div class="row">
+    <div class="col-3">
+        <div class="bg-primary p-3" *ngIf="isVisible">
+            Div 1
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="bg-primary p-3" *ngIf="isActive">
+            Div 2
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="bg-primary p-3" *ngIf="num1==num2">
+            Div 3
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-3 text-center">
+        <button class="btn btn-danger" (click)="hide()">HIDE</button>
+        <button class="btn btn-success mx-2" (click)="show()">SHOW</button>
+    </div>
+
+    <div class="col-3 text-center">
+        <button class="btn btn-danger" (click)="show_hide1(false)">HIDE</button>
+        <button class="btn btn-success mx-2" (click)="show_hide1(true)">SHOW</button>
+    </div>
+    <div class="col-3 text-center">
+        <input type="text" placeholder="Number 1" [(ngModel)]="num1">
+        <input type="text" placeholder="Number 2" [(ngModel)]="num2">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        <div class="col-6">
+            <label>Select Country</label>
+            <select class="form-control" [(ngModel)]="selectedCode">
+                <option>+880</option>
+                <option>+99</option>
+                <option>+96</option>
+                <option>others</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="col-3" *ngIf="selectedCode=='+880'">
+            <label for="">Bangladeshi Number</label>
+            <input type="text" placeholder="Mobile Number">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        <ul>
+            <li *ngFor="let city of cityList">{{city}}</li>
+        </ul>
+        <ol>
+            @for (city of cityList; track $index) {
+            <li>{{city}}</li>
+            }
+        </ol>
+    </div>
+    <div class="col-3">
+        <select>
+            <option>City</option>
+            <option *ngFor="let city of cityList">{{city}}</option>
+        </select>
+    </div>
+    <div class="col-6 text-center">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>SI No.</th>
+                    <th>Student Name</th>
+                    <th>Student Semester</th>
+                    <th>Student Age</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tr class="bg-color" *ngFor="let Student of students; let sr = index">
+                <td>{{sr + 1}}</td>
+                <td>{{Student.Name}}</td>
+                <td>{{Student.Semester}}</td>
+                <td>{{Student.Age}}</td>
+                <td>
+                    @if(Student.grade=='A')
+                    {
+                    Grade A
+                    }
+                    @else if(Student.grade=='C')
+                    {
+                    Grade C
+                    }
+                    @else if(Student.grade=='B')
+                    {
+                    Grade B
+                    }
+                    @else {
+                    No Grade Found!
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-3">
+        <div class="p-3" [ngClass]="stdDivClass">
+            Student
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="p-3" [ngClass]="isGood==true?'bg-success':'bg-danger'">
+            Teacher
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="p-3" [ngClass]="something">
+            Guardian
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="p-3" [ngClass]="isRed==true?'bg-success':'bg-dabger'">
+            Spectators
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-3"></div>
+    <div class="col-3 pt-3">
+        <input type="text" [(ngModel)]="something">
+    </div>
+    <div class="col-3">
+        <div class="pt-3">
+            <button (click)="changecolor('green')">green</button>
+            <button (click)="changecolor('red')">red</button>
+            <input type="checkbox" [(ngModel)]="isRed">
+        </div>
+    </div>
+
+</div>
