@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ProgressBar } from "../progress-bar/progress-bar";
 import { TemplateForm } from '../template-form/template-form';
 import { SharedData } from '../shared-data'
@@ -10,13 +10,18 @@ import { SharedData } from '../shared-data'
   templateUrl: './api-call.html',
   styleUrl: './api-call.css'
 })
-export class ApiCall {
+export class ApiCall implements OnInit {
   http = inject(HttpClient);
 
   jsonUsers: any[] = [];
   complaintUsers: any[] = [];
 
+   ngOnInit() {
 
+    this.dataService.currentList.subscribe(response => {
+      this.userList = response;
+    });
+  }
   getAllUsers() {
     this.http.get('https://jsonplaceholder.typicode.com/users').subscribe((response: any) => {
       this.jsonUsers = response;
@@ -24,9 +29,7 @@ export class ApiCall {
   }
 
   getComplaintUsers() {
-
-    this.http.get('https://crudcrud.com/api/c190eab0de0c45b9b1644a8b7e964b1e/unicorns').subscribe((response: any) => {
-
+    this.http.get('https://api.freeprojectapi.com/api/GoalTracker/getAllUsers').subscribe((response: any) => {
       this.complaintUsers = response;
     })
     console.log(this.complaintUsers);
@@ -34,9 +37,4 @@ export class ApiCall {
 
   userList: any;
   constructor(private dataService: SharedData) { }
-  ngOnInit() {
-    this.dataService.currentList.subscribe(response => {
-      this.userList = response;
-    });
-  }
 }

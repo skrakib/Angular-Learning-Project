@@ -1,12 +1,11 @@
 <div class="row p-3">
-    <div class="col-12">
+    <div class="col-12 table-responsive">
         <app-progress-bar></app-progress-bar>
     </div>
 </div>
 
 <button (click)="getAllUsers()">allUsers</button>
 <table class="table table-bordered">
-
     <thead>
         <tr>
             <th>Id</th>
@@ -29,21 +28,25 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
+                <th>User Id</th>
+                <th>Email</th>
+                <th>password</th>
+                <th>Full Name</th>
+                <th>Mobile No</th>
             </tr>
         </thead>
         <tr *ngFor="let user of complaintUsers;">
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.age}}</td>
+            <td>{{user.userId}}</td>
+            <td>{{user.emailId}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.fullName}}</td>
+            <td>{{user.mobileNo}}</td>
         </tr>
     </table>
 </div>
 
-<!-- 
-<button (click)="getCustomData()">getCustomData</button> -->
+<!--
+<button (click)="getCustomData()">getCustomData</button> 
 <div class="row p-3">
     <table class="table table-bordered">
         <thead>
@@ -65,4 +68,4 @@
             <td>{{user.zip}}</td>
         </tr>
     </table>
-</div>
+</div> -->

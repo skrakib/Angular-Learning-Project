@@ -1,1 +1,102 @@
-<p>user works!</p>
+<div class="row">
+    <div class="col-7">
+        <div class="card">
+            <div class="card-header bg-success">
+                User Details
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of allUsers">
+                            <td>{{user.userId}}</td>
+                            <td>{{user.fullName}}</td>
+                            <td>{{user.emailId}}</td>
+                            <td>{{user.mobileNo}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" (click)="editUser(user)">Edit</button>
+                                <button class="btn btn-sm btn-danger" (click)="onDelete(user.userId)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="card">
+            <div class="card-header bg-success">
+                User Form
+            </div>
+            <div class="card-body">
+                <form #formvalue="ngForm">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" #fullName="ngModel"  required minlength="5" [(ngModel)]="userObject.fullName" class="form-control" name="fullName" id="fullName">
+                            @if(fullName.errors?.['required'] && fullName.touched){
+                                <span class="text-danger">Full Name is required</span>
+                            }
+                            @if(fullName.errors?.['minlength'] && fullName.touched){
+                                <span class="text-danger">Full Name must be at least 5 characters long</span>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <label for="emailId">Email</label>
+                            <input type="email" #emailId="ngModel" required pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$' name="emailId" [(ngModel)]="userObject.emailId" class="form-control">
+                            @if(emailId.errors?.['required'] && emailId.touched){
+                                <span class="text-danger">Enter email</span>
+                            }
+                            <!-- @if(emailId.errors?.['pattern'] && emailId.touched){
+                                <span class="text-danger">Enter valid email</span>
+                            } -->
+                        </div>
+
+                        <div class="col-6">
+                            <label for="password">Password</label>
+                            <input type="password" #pwd="ngModel" required minlength="8" [(ngModel)]="userObject.password" name="password" class="form-control">
+                            @if(pwd.errors?.['required'] && pwd.touched){
+                                <span class="text-danger">Password is required</span>
+                            }
+                            @if(pwd.errors?.['minlength'] && pwd.touched){
+                                <span class="text-danger">Password must be at least 8 characters long</span>
+                            }
+                        </div>
+
+                        <div class="col-6">
+                            <label for="mobileNo">Mobile No</label>
+                            <input type="text" #mobileNo="ngModel" pattern="^\d{11}$" [(ngModel)]="userObject.mobileNo" name="mobileNo" class="form-control">
+                            @if(mobileNo.errors?.['pattern'] && mobileNo.touched)
+                            {
+                                <span class="text-danger">Enter valid mobile number</span>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-6 text-center">
+                            <button class="btn btn-secondary" (click)="onReset()">Reset</button>
+                        </div>
+                        <div class="col-6 text-center">
+                            @if(userObject.userId != 0){
+                            <button class="btn btn-primary" (click)="onUpdate(userObject.userId)">Update</button>
+                            } @else {
+                            <button class="btn btn-success" (click)="onSave()">Save</button>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
